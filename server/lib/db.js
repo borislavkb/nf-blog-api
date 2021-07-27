@@ -47,7 +47,7 @@ function insert(article) {
       },
     };
     articles.push(newArticle);
-    fs.writeFile(dbPath, JSON.stringify(posts));
+    fs.writeFile(dbPath, JSON.stringify(articles));
     return newArticle;
   });
 }
