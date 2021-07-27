@@ -24,6 +24,13 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/articles", (req, res) => {
+  res.json({
+    item: "This is a response",
+  });
+  res.send("Server has listened and responded back !");
+});
+
 /*
   We have to start the server. We make it listen on the port 4000
 
