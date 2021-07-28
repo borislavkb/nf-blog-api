@@ -101,7 +101,7 @@ function updateById(id, content) {
     let newArticle;
     const newArticles = articles.map((article) => {
       if (article.id === id) {
-        newAricle = {
+        newArticle = {
           ...article,
           ...content,
         };

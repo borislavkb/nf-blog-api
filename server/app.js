@@ -25,10 +25,40 @@ app.get("/", (req, res) => {
 });
 
 app.get("/articles", (req, res) => {
-  res.json({
-    item: "This is a response",
-  });
-  res.send("Server has listened and responded back !");
+  db.findAll()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(500);
+      res.send("something went wrong");
+    });
+});
+
+app.post("/articles", (req, res) => {
+  db.insert(req.body)
+    .then((newPost) => {
+      res.status(201).send(newPost);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send(error);
+    });
+});
+
+app.get("/articles/:id", (req, res) => {
+  res.json({ message: OK });
+  res.send(req.params);
+});
+
+app.patch("/articles/:id", (req, res) => {
+  res.json({});
+  res.send(req.params);
+});
+
+app.delete("/articles/:id", (req, res) => {
+  res.json({});
+  res.send(req.params);
 });
 
 /*
