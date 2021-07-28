@@ -47,18 +47,31 @@ app.post("/articles", (req, res) => {
 });
 
 app.get("/articles/:id", (req, res) => {
-  res.json({ message: OK });
-  res.send(req.params);
+  const id = req.params.id;
+  db.findById(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).end();
+        return;
+      }
+      res.send(data);
+    })
+    .catch(() => {
+      res.status(500).send();
+    });
 });
 
 app.patch("/articles/:id", (req, res) => {
-  res.json({});
-  res.send(req.params);
+  console.log(req.body);
 });
 
 app.delete("/articles/:id", (req, res) => {
-  res.json({});
-  res.send(req.params);
+  const id = req.params.id;
+  db.updateById(id)
+    .then(() => res.status(204).end())
+    .catch(() => {
+      res.status(500).end();
+    });
 });
 
 /*
